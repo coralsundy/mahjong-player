@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=800">
+        <title>電脳麻将: 牌譜ビューア</title>
+        <meta name="description" content="電脳麻将形式あるいは天鳳の牌譜を再生します">
+        <meta name="twitter:card" content="summary">
+        <meta property="og:title" content="電脳麻将: 牌譜ビューア">
+        <meta property="og:description" content="電脳麻将形式あるいは天鳳の牌譜を再生します">
+        <meta property="og:image" content="https://mjplayer.coralsundy.com/img/icon.png">
+    <link rel="icon" type="image/png" href="img/icon.png">
+    <link rel="apple-touch-icon" type="image/png" href="img/icon.png">
+    <link rel="stylesheet" type="text/css" href="css/majiang-2.4.16.css">
+    <script src="js/majiang-2.4.16.js" defer></script>
+    <script src="js/paipu-2.4.16.js" defer></script>
+  </head>
+  <body class="file">
+    <div id="loaderr" style="display: none">
+      <p>
+        プログラムのロードでエラーが発生しました。
+        お使いのブラウザでは実行できない可能性があります。
+        リロードして問題が解決しない場合は、
+        Google Chromeなど最新のブラウザでアクセスしてみてください。
+      </p>
+      <script>
+        window.onload = function(){
+          var elem = document.getElementById('loaderr');
+          if (typeof Majiang === 'undefined') elem.removeAttribute('style');
+        }
+      </script>
+    </div>
+    <ul id="navi">
+      <li><a href="../">Home</a></li>
+      <li><a href="index.html">電脳麻将</a></li>
+      <li><a href="autoplay.html">自動対戦</a></li>
+      <li><a href="netplay.html">ネット対戦</a></li>
+      <li><a href="rule.html">ルール</a></li>
+      <li><a href="paipu.html">牌譜</a></li>
+      <li><a href="paili.html">牌理</a></li>
+      <li><a href="hule.html">点計算</a></li>
+      <li><a href="drill.html">ドリル</a></li>
+      <li><a href="dapai.html">何切る</a></li>
+      <li><a href="paiga.html">牌画</a></li>
+      <li><a href="https://github.com/kobalab/Majiang" target="_blank">GitHub</a></li>
+      <li><a href="https://www.amazon.co.jp/dp/4798067881" target="_blank">書籍</a></li>
+    </ul>
+    <div id="loaddata">
+      <img class="pai" data-pai="m1" src="img/m1.gif" alt="イーワン">
+      <img class="pai" data-pai="m2" src="img/m2.gif" alt="リャンワン">
+      <img class="pai" data-pai="m3" src="img/m3.gif" alt="サンワン">
+      <img class="pai" data-pai="m4" src="img/m4.gif" alt="スーワン">
+      <img class="pai" data-pai="m5" src="img/m5.gif" alt="ウーワン">
+      <img class="pai" data-pai="m6" src="img/m6.gif" alt="ローワン">
+      <img class="pai" data-pai="m7" src="img/m7.gif" alt="チーワン">
+      <img class="pai" data-pai="m8" src="img/m8.gif" alt="パーワン">
+      <img class="pai" data-pai="m9" src="img/m9.gif" alt="キューワン">
+      <img class="pai" data-pai="m0" src="img/m0.gif" alt="赤ウーワン">
+      <br>
+      <img class="pai" data-pai="p1" src="img/p1.gif" alt="イーピン">
+      <img class="pai" data-pai="p2" src="img/p2.gif" alt="リャンピン">
+      <img class="pai" data-pai="p3" src="img/p3.gif" alt="サンピン">
+      <img class="pai" data-pai="p4" src="img/p4.gif" alt="スーピン">
+      <img class="pai" data-pai="p5" src="img/p5.gif" alt="ウーピン">
+      <img class="pai" data-pai="p6" src="img/p6.gif" alt="ローピン">
+      <img class="pai" data-pai="p7" src="img/p7.gif" alt="チーピン">
+      <img class="pai" data-pai="p8" src="img/p8.gif" alt="パーピン">
+      <img class="pai" data-pai="p9" src="img/p9.gif" alt="キューピン">
+      <img class="pai" data-pai="p0" src="img/p0.gif" alt="赤ウーピン">
+      <br>
+      <img class="pai" data-pai="s1" src="img/s1.gif" alt="イーソー">
+      <img class="pai" data-pai="s2" src="img/s2.gif" alt="リャンソー">
+      <img class="pai" data-pai="s3" src="img/s3.gif" alt="サンソー">
+      <img class="pai" data-pai="s4" src="img/s4.gif" alt="スーソー">
+      <img class="pai" data-pai="s5" src="img/s5.gif" alt="ウーソー">
+      <img class="pai" data-pai="s6" src="img/s6.gif" alt="ローソー">
+      <img class="pai" data-pai="s7" src="img/s7.gif" alt="チーソー">
+      <img class="pai" data-pai="s8" src="img/s8.gif" alt="パーソー">
+      <img class="pai" data-pai="s9" src="img/s9.gif" alt="キューソー">
+      <img class="pai" data-pai="s0" src="img/s0.gif" alt="赤ウーソー">
+      <br>
+      <img class="pai" data-pai="z1" src="img/z1.gif" alt="トン">
+      <img class="pai" data-pai="z2" src="img/z2.gif" alt="ナン">
+      <img class="pai" data-pai="z3" src="img/z3.gif" alt="シャー">
+      <img class="pai" data-pai="z4" src="img/z4.gif" alt="ペー">
+      <img class="pai" data-pai="z5" src="img/z5.gif" alt="ハク">
+      <img class="pai" data-pai="z6" src="img/z6.gif" alt="ハツ">
+      <img class="pai" data-pai="z7" src="img/z7.gif" alt="チュン">
+      <img class="pai" data-pai="_" src="img/pai.gif" alt="">
+      <br>
+      <audio data-name="dapai" src="audio/dahai11.wav" volume="0.2" preload></audio>
+      <audio data-name="chi" src="audio/chii.wav" volume="0.2" preload></audio>
+      <audio data-name="peng" src="audio/pon.wav" volume="0.2" preload></audio>
+      <audio data-name="gang" src="audio/kan.wav" volume="0.2" preload></audio>
+      <audio data-name="rong" src="audio/ron.wav" volume="0.2" preload></audio>
+      <audio data-name="zimo" src="audio/tsumo.wav" volume="0.2" preload></audio>
+      <audio data-name="lizhi" src="audio/richi.wav" volume="0.2" preload></audio>
+      <audio data-name="gong" src="audio/nc43994.wav" volume="1" preload></audio>
+      <audio data-name="beep" src="audio/beep.wav" volume="0.2" preload></audio>
+    </div>
+    <div id="file">
+      <h1><img src="img/logo.png" alt="電脳麻将"> 牌譜ビューア
+      </h1>
+      <div class="version">ver. 2.4.16</div>
+      <div class="file hide">
+        <div class="list">
+          <div class="row">
+            <div class="button"><a class="replay"><img src="img/icon-play.png">再生</a>
+              <a class="edit"><img src="img/icon-edit.png">編集</a>
+              <a class="download"><img src="img/icon-download-alt.png">保存</a>
+              <a class="delete"><img src="img/icon-trash.png">削除</a>
+              <span class="move"><img src="img/icon-resize-vertical.png"></span>
+            </div>
+            <div class="content">
+              <div class="title"></div>
+              <div class="player"></div>
+            </div>
+          </div>
+        </div>
+        <div class="error hide"></div>
+        <div class="loading hide">
+          <div class="blink">牌譜取得中......</div>
+        </div>
+        <label class="upload"><img src="img/icon-upload-alt.png">牌譜追加
+          <input type="file" multiple>
+        </label>
+        <label class="storage">
+          <input name="storage" type="checkbox">ローカルストレージ
+        </label>
+        <div class="button"><a class="stat"><img src="img/icon-dotlist.png">牌譜集計</a>
+          <a class="edit"><img src="img/icon-edit.png">牌譜作成</a>
+          <a class="download"><img src="img/icon-download-alt.png">牌譜保存</a>
+        </div>
+        <form class="tenhou hide">
+          <input name="url" placeholder="天鳳 牌譜ID/URL">
+          <input type="image" src="img/icon-squaresearch.png" alt="検索" align="top">
+        </form>
+      </div>
+    </div>
+    <div id="stat">
+      <h1><img src="img/logo.png" alt="電脳麻将"> 牌譜集計</h1>
+      <div class="version">ver. 2.4.16</div>
+      <div class="stat">
+        <div>
+          <div class="button">
+            <label class="cut-off">
+              <input name="cut-off" type="checkbox">対戦数 
+              <input name="n_game"> 以下は表示しない
+            </label><a class="file"><img src="img/icon-arrow-left.png">牌譜一覧        </a>
+          </div>
+          <h2 class="title"></h2>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th><a>対戦</a></th>
+                <th><a>ポイント</a></th>
+                <th><a>順位</a></th>
+                <th><a>トップ</a></th>
+                <th><a>連対</a></th>
+                <th><a>ラス</a></th>
+                <th><a>和了</a></th>
+                <th><a>放銃</a></th>
+                <th><a>立直</a></th>
+                <th><a>副露</a></th>
+                <th><a>打点</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+                <td class="num"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="editor">
+      <div class="menu">
+        <h1><img src="img/logo.png" alt="電脳麻将">
+          <div>牌譜エディタ</div>
+        </h1>
+        <div class="version">ver. 2.4.16</div>
+        <div class="title"></div>
+        <div class="score">
+          <select name="game">
+            <option>東一局</option>
+          </select>
+          <div class="jicun">
+            <label><img class="chouma" src="img/100.gif" alt="本場">: 
+              <input name="changbang">
+            </label>
+            <label><img class="chouma" src="img/1000.gif" alt="供託">: 
+              <input name="lizhibang">
+            </label>
+          </div>
+          <div class="shan">
+            <div class="flip">
+              <div class="pai"></div>
+              <input name="baopai">
+            </div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input name="baopai">
+            </div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input name="baopai">
+            </div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input name="baopai">
+            </div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input name="baopai">
+            </div>
+          </div>
+        </div>
+        <ul class="log">
+          <li> <span class="name">概要</span><a class="minus">-</a><a class="plus">+</a></li>
+        </ul>
+        <div class="button"><a class="save" title="保存 (S)" accesskey="s"><img src="img/icon-save-floppy.png">保存</a>
+          <a class="replay" title="再生 (R)" accesskey="r"><img src="img/icon-play.png">再生</a>
+          <a class="exit" title="編集終了"><img src="img/icon-exit.png">編集終了</a>
+        </div>
+      </div>
+      <div class="overview">
+        <textarea name="title" rows="2" cols="40"></textarea>
+        <hr>
+        <table>
+          <tr>
+            <th>起家</th>
+            <th>対局者</th>
+            <th>得点</th>
+            <th>ポイント</th>
+          </tr>
+          <tr>
+            <td class="qijia">
+              <input type="radio" name="qijia" value="0">
+            </td>
+            <td class="player">
+              <textarea name="player" rows="2" cols="24"></textarea>
+            </td>
+            <td class="defen">
+              <input name="defen" size="6">
+            </td>
+            <td class="point">
+              <input name="point" size="6">
+            </td>
+          </tr>
+          <tr>
+            <td class="qijia">
+              <input type="radio" name="qijia" value="1">
+            </td>
+            <td class="player">
+              <textarea name="player" rows="2" cols="24"></textarea>
+            </td>
+            <td class="defen">
+              <input name="defen" size="6">
+            </td>
+            <td class="point">
+              <input name="point" size="6">
+            </td>
+          </tr>
+          <tr>
+            <td class="qijia">
+              <input type="radio" name="qijia" value="2">
+            </td>
+            <td class="player">
+              <textarea name="player" rows="2" cols="24"></textarea>
+            </td>
+            <td class="defen">
+              <input name="defen" size="6">
+            </td>
+            <td class="point">
+              <input name="point" size="6">
+            </td>
+          </tr>
+          <tr>
+            <td class="qijia">
+              <input type="radio" name="qijia" value="3">
+            </td>
+            <td class="player">
+              <textarea name="player" rows="2" cols="24"></textarea>
+            </td>
+            <td class="defen">
+              <input name="defen" size="6">
+            </td>
+            <td class="point">
+              <input name="point" size="6">
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="paipu">
+        <div class="player"><span class="jia"></span><span class="name"></span></div>
+        <div class="defen">
+          <input name="defen" size="6">
+          <div class="fenpei"></div>
+        </div>
+        <div class="result">
+          <div class="text"></div><a class="button"> <img src="img/icon-edit.png">和了/流局</a>
+        </div>
+        <div class="qipai flip" tabindex="1">
+          <div class="shoupai">
+            <div class="pai"></div>
+          </div>
+          <input name="qipai">
+        </div>
+        <div class="mo">
+          <div class="moda">
+            <div class="text"></div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+          </div>
+        </div>
+        <div class="da">
+          <div class="moda">
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+            <div class="text"></div>
+          </div>
+        </div>
+        <div class="shoupai">
+          <div class="bingpai"></div>
+          <div class="fulou"></div>
+        </div>
+      </div>
+      <div class="paipu">
+        <div class="player"><span class="jia"></span><span class="name"></span></div>
+        <div class="defen">
+          <input name="defen" size="6">
+          <div class="fenpei"></div>
+        </div>
+        <div class="result">
+          <div class="text"></div><a class="button"> <img src="img/icon-edit.png">和了/流局</a>
+        </div>
+        <div class="qipai flip" tabindex="1">
+          <div class="shoupai">
+            <div class="pai"></div>
+          </div>
+          <input name="qipai">
+        </div>
+        <div class="mo">
+          <div class="moda">
+            <div class="text"></div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+          </div>
+        </div>
+        <div class="da">
+          <div class="moda">
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+            <div class="text"></div>
+          </div>
+        </div>
+        <div class="shoupai">
+          <div class="bingpai"></div>
+          <div class="fulou"></div>
+        </div>
+      </div>
+      <div class="paipu">
+        <div class="player"><span class="jia"></span><span class="name"></span></div>
+        <div class="defen">
+          <input name="defen" size="6">
+          <div class="fenpei"></div>
+        </div>
+        <div class="result">
+          <div class="text"></div><a class="button"> <img src="img/icon-edit.png">和了/流局</a>
+        </div>
+        <div class="qipai flip" tabindex="1">
+          <div class="shoupai">
+            <div class="pai"></div>
+          </div>
+          <input name="qipai">
+        </div>
+        <div class="mo">
+          <div class="moda">
+            <div class="text"></div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+          </div>
+        </div>
+        <div class="da">
+          <div class="moda">
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+            <div class="text"></div>
+          </div>
+        </div>
+        <div class="shoupai">
+          <div class="bingpai"></div>
+          <div class="fulou"></div>
+        </div>
+      </div>
+      <div class="paipu">
+        <div class="player"><span class="jia"></span><span class="name"></span></div>
+        <div class="defen">
+          <input name="defen" size="6">
+          <div class="fenpei"></div>
+        </div>
+        <div class="result">
+          <div class="text"></div><a class="button"> <img src="img/icon-edit.png">和了/流局</a>
+        </div>
+        <div class="qipai flip" tabindex="1">
+          <div class="shoupai">
+            <div class="pai"></div>
+          </div>
+          <input name="qipai">
+        </div>
+        <div class="mo">
+          <div class="moda">
+            <div class="text"></div>
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+          </div>
+        </div>
+        <div class="da">
+          <div class="moda">
+            <div class="flip">
+              <div class="pai"></div>
+              <input>
+            </div>
+            <div class="text"></div>
+          </div>
+        </div>
+        <div class="shoupai">
+          <div class="bingpai"></div>
+          <div class="fulou"></div>
+        </div>
+      </div>
+      <dialog class="hule">
+        <form method="dialog">
+          <label class="l">和了 
+            <select name="l">
+              <option value="">(流局)</option>
+            </select>
+          </label>
+          <label class="baojia">放銃 
+            <select name="baojia" disabled>
+              <option value="">(ツモ)</option>
+            </select>
+          </label>
+          <label class="fubaopai">裏ドラ 
+            <div class="fubaopai">
+              <div class="shan">
+                <div class="flip" tabindex="0">
+                  <div class="pai"></div>
+                  <input name="fubaopai">
+                </div>
+                <div class="flip" tabindex="0">
+                  <div class="pai"></div>
+                  <input name="fubaopai">
+                </div>
+                <div class="flip" tabindex="0">
+                  <div class="pai"></div>
+                  <input name="fubaopai">
+                </div>
+                <div class="flip" tabindex="0">
+                  <div class="pai"></div>
+                  <input name="fubaopai">
+                </div>
+                <div class="flip" tabindex="0">
+                  <div class="pai"></div>
+                  <input name="fubaopai">
+                </div>
+              </div>
+            </div>
+          </label>
+          <div class="shoupai">
+            <div class="bingpai"></div>
+            <div class="fulou"></div>
+          </div>
+          <input name="shoupai" type="hidden">
+          <ul class="hupai">
+            <li> 
+              <input name="hupai">
+              <input name="fanshu" size="2">翻
+              <input name="baojia" type="hidden">
+            </li>
+          </ul>
+          <div class="defen"><span class="damanguan">役満
+              <input name="damanguan" size="2"></span><span class="normal">
+              <input name="fu" size="3">符 
+              <input name="fanshu" size="2" disabled>翻</span>
+            <input name="defen" size="6">点
+          </div>
+          <div class="jicun">
+            <label><img class="chouma" src="img/100.gif" alt="本場">: 
+              <input name="changbang">
+            </label>
+            <label><img class="chouma" src="img/1000.gif" alt="供託">: 
+              <input name="lizhibang">
+            </label>
+          </div>
+          <ul class="fenpei">
+            <li><span>東</span>
+              <input name="fenpei" size="6">
+            </li>
+            <li><span>南</span>
+              <input name="fenpei" size="6">
+            </li>
+            <li><span>西</span>
+              <input name="fenpei" size="6">
+            </li>
+            <li><span>北</span>
+              <input name="fenpei" size="6">
+            </li>
+          </ul>
+          <div class="button">
+            <input class="close" type="button" value="取消">
+            <input class="delete" type="button" value="削除">
+            <div class="submit">
+              <input type="submit" value="決定">
+            </div>
+          </div>
+        </form>
+      </dialog>
+      <dialog class="pingju">
+        <form method="dialog">
+          <div class="hule">
+            <input class="hule" type="button" value="和了">
+          </div>
+          <label>流局理由: 
+            <input name="pingju">
+          </label>
+          <ul>
+            <li><span>東</span>
+              <input name="fenpei" size="6">
+              <div>
+                <input name="daopai" type="checkbox" value="1">
+                <div class="shoupai">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <input name="shoupai" type="hidden">
+              </div>
+            </li>
+            <li><span>南</span>
+              <input name="fenpei" size="6">
+              <div>
+                <input name="daopai" type="checkbox" value="1">
+                <div class="shoupai">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <input name="shoupai" type="hidden">
+              </div>
+            </li>
+            <li><span>西</span>
+              <input name="fenpei" size="6">
+              <div>
+                <input name="daopai" type="checkbox" value="1">
+                <div class="shoupai">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <input name="shoupai" type="hidden">
+              </div>
+            </li>
+            <li><span>北</span>
+              <input name="fenpei" size="6">
+              <div>
+                <input name="daopai" type="checkbox" value="1">
+                <div class="shoupai">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <input name="shoupai" type="hidden">
+              </div>
+            </li>
+          </ul>
+          <div class="button">
+            <input class="close" type="button" value="取消">
+            <input class="delete" type="button" value="削除">
+            <div class="submit">
+              <input type="submit" value="決定">
+            </div>
+          </div>
+        </form>
+      </dialog>
+    </div>
+    <div id="space"></div>
+    <div id="board">
+      <div class="board">
+        <div class="score">
+          <div class="juchang">
+            <div class="jushu"></div>
+            <div class="jicun"><img class="chouma" src="img/100.gif" alt="本場"> : <span class="changbang"></span><br><img class="chouma" src="img/1000.gif" alt="供託"> : <span class="lizhibang"></span></div>
+          </div>
+          <div class="shan">
+            <div class="baopai"></div>
+            <div>牌数: <span class="paishu"></span></div>
+          </div>
+          <div class="defen">
+            <div class="main"></div>
+            <div class="xiajia"></div>
+            <div class="duimian"></div>
+            <div class="shangjia"></div>
+          </div>
+        </div>
+        <div class="timer hide"></div>
+        <div class="player-button hide"><span class="button cansel" aria-label="キャンセル">×</span><span class="button daopai">ノー聴</span><span class="button chi">チー</span><span class="button peng">ポン</span><span class="button gang">カン</span><span class="button lizhi">リーチ</span><span class="button rong"> ロン</span><span class="button zimo">ツモ</span><span class="button pingju">流局</span></div>
+        <div class="select-mianzi hide"></div>
+                <div class="player main"></div>
+                <div class="shoupai main">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <div class="he main">
+                  <div class="lizhi"><img class="chouma hide" src="img/1000.gif"></div>
+                  <div class="dapai"></div>
+                </div>
+                <div class="say main"></div>
+                <div class="player xiajia"></div>
+                <div class="shoupai xiajia">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <div class="he xiajia">
+                  <div class="lizhi"><img class="chouma hide" src="img/1000.gif"></div>
+                  <div class="dapai"></div>
+                </div>
+                <div class="say xiajia"></div>
+                <div class="player duimian"></div>
+                <div class="shoupai duimian">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <div class="he duimian">
+                  <div class="lizhi"><img class="chouma hide" src="img/1000.gif"></div>
+                  <div class="dapai"></div>
+                </div>
+                <div class="say duimian"></div>
+                <div class="player shangjia"></div>
+                <div class="shoupai shangjia">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <div class="he shangjia">
+                  <div class="lizhi"><img class="chouma hide" src="img/1000.gif"></div>
+                  <div class="dapai"></div>
+                </div>
+                <div class="say shangjia"></div>
+        <div class="hule-dialog hide">
+          <div>
+            <div>
+              <div class="hule">
+                <div class="shan baopai"><span class="baopai"></span></div>
+                <div class="shan fubaopai"><span class="fubaopai"></span></div>
+                <div class="shoupai">
+                  <div class="bingpai"></div>
+                  <div class="fulou"></div>
+                </div>
+                <table class="hupai">
+                  <tr class="r_hupai">
+                    <td class="name"></td>
+                    <td class="fanshu"></td>
+                  </tr>
+                  <tr class="r_defen">
+                    <td class="defen" colspan="2"></td>
+                  </tr>
+                </table>
+                <div class="jicun"><img class="chouma" src="img/100.gif" alt="本場"> : <span class="changbang"></span> <img class="chouma" src="img/1000.gif" alt="供託"> : <span class="lizhibang"></span></div>
+              </div>
+              <div class="pingju"></div>
+              <div class="fenpei">
+                        <div class="main"><span class="feng"></span>: <span class="player"></span><span class="defen"></span><span class="diff"></span></div>
+                        <div class="xiajia"><span class="feng"></span>: <span class="player"></span><span class="defen"></span><span class="diff"></span></div>
+                        <div class="duimian"><span class="feng"></span>: <span class="player"></span><span class="defen"></span><span class="diff"></span></div>
+                        <div class="shangjia"><span class="feng"></span>: <span class="player"></span><span class="defen"></span><span class="diff"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="summary">
+          <div>
+            <div>
+              <table>
+                <thead>
+                  <tr class="r_player">
+                    <td colspan="3"></td>
+                    <th class="player"></th>
+                    <th class="player"></th>
+                    <th class="player"></th>
+                    <th class="player">           </th>
+                  </tr>
+                </thead>
+                <tbody class="body">
+                  <tr class="r_diff">
+                    <th class="jushu"></th>
+                    <th class="changbang"></th>
+                    <th class="last"></th>
+                    <td class="back"><span class="diff"></span><span class="lizhi"></span></td>
+                    <td class="back"><span class="diff"></span><span class="lizhi"></span></td>
+                    <td class="back"><span class="diff"></span><span class="lizhi"></span></td>
+                    <td class="back"><span class="diff"></span><span class="lizhi"></span></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr class="r_defen">
+                    <td colspan="3"></td>
+                    <td class="defen"></td>
+                    <td class="defen"></td>
+                    <td class="defen"></td>
+                    <td class="defen"></td>
+                  </tr>
+                  <tr class="r_point">
+                    <td colspan="3"></td>
+                    <td class="point"></td>
+                    <td class="point"></td>
+                    <td class="point"></td>
+                    <td class="point"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="kaiju">
+          <div>
+            <div class="title"></div>
+            <div class="player">
+              <div class="main"></div>
+              <div class="xiajia"></div>
+              <div class="duimian"></div>
+              <div class="shangjia"></div>
+            </div>
+          </div>
+        </div>
+        <div class="suspend hide"></div>
+        <div class="tenhou-dialog hide">
+          <form>
+            <ur>
+              <li>
+                <label>
+                  <input name="type" type="radio" value="URL" checked>URL形式
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input name="type" type="radio" value="JSON">JSON形式
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input name="limited" type="checkbox" value="1">この局のみ
+                </label>
+              </li>
+            </ur>
+            <textarea rows="5" disabled></textarea>
+            <div class="button">
+              <input type="button" value="閉じる">
+              <input type="submit" value="コピー">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="analyzer">
+        <table class="shoupai">
+          <tr class="row">
+            <td class="xiangting"></td>
+            <td class="eval"></td>
+            <td>
+              <div class="shoupai">
+                <div class="bingpai"></div>
+                <div class="fulou"></div>
+              </div>
+            </td>
+            <td class="action"></td>
+          </tr>
+        </table>
+        <table class="dapai">
+          <tr class="row">
+            <td class="p"></td>
+            <td class="xiangting"></td>
+            <td class="eval"></td>
+            <td class="tingpai"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="controller"><img class="exit" src="img/icon-exit.png" title="終了 [q]"><img class="summary" src="img/icon-list.png" title="集計表示 [?]"><img class="sound on" src="img/icon-volume-up.png" title="音声OFF [a]"><img class="sound off" src="img/icon-mutealt.png" title="音声ON [a]"><img class="analyzer" src="img/icon-lightbulb-idea.png" title="検討ON/OFF [i]">
+        <div></div><img class="first" src="img/icon-step-backward.png" title="配牌/前局 [←]"><img class="prev" src="img/icon-backward.png" title="戻る [↑]"><img class="play on" src="img/icon-play.png" title="再開 [space]"><img class="play off" src="img/icon-pause.png" title="停止 [space]"><img class="next" src="img/icon-forward.png" title="進む [↓]"><img class="last" src="img/icon-step-forward.png" title="結果/次局 [→]">
+        <div class="speed"><img class="minus" src="img/icon-minus-sign.png" title="速度- [-]"><span></span><span></span><span></span><span></span><span></span><img class="plus" src="img/icon-plus-sign.png" title="速度+ [+]"></div>
+      </div>
+      <div class="download hide"><a><img src="img/icon-download-alt.png">牌譜保存</a></div>
+    </div>
+    <div class="version">ver. 2.4.16</div>
+  </body>
+</html>
