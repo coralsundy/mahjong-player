@@ -1,8 +1,8 @@
-const webpack = require('webpack');
-
 const version = require('./package.json').version;
 
 const TerserPlugin = require("terser-webpack-plugin");
+
+//const webpack = require('webpack');
 
 module.exports = {
     entry:  {
@@ -25,9 +25,9 @@ module.exports = {
     optimization: {
         minimizer: [ new TerserPlugin({extractComments: false}) ],
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL || 'http://localhost:8080')
-        }),
-    ],
+    //plugins: [
+    //    new webpack.DefinePlugin({
+    //        'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL || 'http://localhost:8080')
+    //    }),
+    //],
 };

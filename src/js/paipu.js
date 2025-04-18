@@ -11,7 +11,10 @@ const { hide, show, fadeIn, scale   } = Majiang.UI.Util;
 
 $(function(){
 
-    const tenhou_log = process.env.BASE_URL + '/majiang/tenhou-log/';
+    //const tenhou_log = 'https://tenhou.net/5/mjlog2json.cgi?';
+    const tenhou_log = 'https://tenhou.net/0/log/?';
+
+    console.log(`tenhou_log: ${tenhou_log}`);
 
     const pai   = Majiang.UI.pai($('#loaddata'));
     const audio = Majiang.UI.audio($('#loaddata'));

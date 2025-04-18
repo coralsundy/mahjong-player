@@ -8,7 +8,7 @@
     "build:html-prod": "pug -o dist -P src/html/page/ --obj config/prod.json",
     "build:css": "stylus src/css/index.styl -o dist/css/majiang-2.4.16.css",
     "build:js-dev": "webpack --mode development --devtool inline-source-map",
-    "build:js-prod": "env BASE_URL=https://mjplayer.coralsundy.com webpack --mode production",
+    "build:js-prod": "webpack --mode production",
     "build": "npm run build:html-dev && npm run build:css && npm run build:js-dev",
     "release": "npm run build:html-prod && npm run build:css && npm run build:js-prod",
     "start": "npm run clean && npm run build && node server.js",
@@ -31,13 +31,12 @@
   "devDependencies": {
     "pug-cli": "^1.0.0-alpha6",
     "stylus": "^0.64.0",
-    "webpack": "^5.99.5",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@kobalab/majiang-ai": "^1.0.13",
     "@kobalab/majiang-core": "^1.3.2",
-    "@kobalab/majiang-ui": "^1.4.15",
+    "@kobalab/majiang-ui":"github:coralsundy/majiang-ui#063245d53d19888e523f48b6846f1396d6444656",
     "@kobalab/tenhou-url-log": "^1.0.3",
     "express": "^5.1.0",
     "jquery": "^3.7.1"
