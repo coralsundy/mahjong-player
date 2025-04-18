@@ -1,3 +1,11 @@
+This is a fork of the original mahjong player suite (Majiang) created by @kobalab with contributions from other members.
+
+It is created for personal use only and I will take it offline if the original creation complains.
+
+Thanks.
+
+------
+
 <h1><a href="https://kobalab.net/majiang/"><img src="dist/img/logo.png" alt="電脳麻将" height=72></a></h1>
 
 HTML5 + JavaScript で動作する麻雀アプリ「電脳麻将」
