@@ -4,6 +4,23 @@ It is created for personal use only and I will take it offline if the original c
 
 Thanks.
 
+### Tweaks:
+
+* 2025/04/18: Bundle majiang-server with the game frontend as a whole, update node scripts
+* 2025/04/17: Switch from local json to dynamically pull from tenhou xml then convert back to json
+* 2025/04/17: Add deploy json to switch base_url instead of hardcoding
+
+
+### Commands:
+
+* npm run dev / npm run release - Build site docs, update config/\*.json for different base_url
+* npm run server:dev / npm run server:release - Start majiang backend express server and host `dist` after building docs
+* npm run bot - Show commands to start bot and connect to the server
+
+------
+
+Website: https://mjplayer.coralsundy.com
+
 ------
 
 <h1><a href="https://kobalab.net/majiang/"><img src="dist/img/logo.png" alt="電脳麻将" height=72></a></h1>
