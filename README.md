@@ -4,6 +4,12 @@ It is created for personal use only and I will take it offline if the original c
 
 Thanks.
 
+### Tweaks:
+
+* 2025/04/17: Switch from local json to dynamically pull from tenhou xml then convert back to json
+* 2025/04/17: Add deploy json to switch base_url instead of hardcoding
+* 2025/04/17: Add express server contributed by @xingfanxia in upstream
+
 ------
 
 <h1><a href="https://kobalab.net/majiang/"><img src="dist/img/logo.png" alt="電脳麻将" height=72></a></h1>
