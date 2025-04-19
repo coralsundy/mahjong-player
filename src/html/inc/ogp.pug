@@ -8,6 +8,9 @@ mixin ogp(title, description, image)
   if description != null
     meta(property="og:description" content=description)
   if image == null
-    meta(property="og:image" content=base_url + "/img/icon.png")
+    if img_icon_url
+      meta(property="og:image" content=img_icon_url)
+    else
+      meta(property="og:image" content=base_url + "/img/icon.png")
   if image != null
     meta(property="og:image" content=image)

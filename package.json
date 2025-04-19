@@ -6,13 +6,14 @@
   "scripts": {
     "build:html-dev": "pug -o dist -P src/html/page/ --obj config/dev.json",
     "build:html-prod": "pug -o dist -P src/html/page/ --obj config/prod.json",
+    "build:html-docker": "pug -o dist -P src/html/page/ --obj config/docker.json",
     "build:css": "stylus src/css/index.styl -o dist/css/majiang-2.4.16.css",
     "build:js-dev": "webpack --mode development --devtool inline-source-map",
     "build:js-prod": "webpack --mode production",
-    "dev": "npm run build:html-dev && npm run build:css && npm run build:js-dev",
-    "release": "npm run build:html-prod && npm run build:css && npm run build:js-prod",
-    "server:dev": "npm run clean && npm run dev && majiang-server -p 8080 -c /netplay.html -d ./dist -S",
-    "server:release": "npm run clean && npm run release && majiang-server -p 8080 -c /netplay.html -d ./dist -S",
+    "build:all-dev": "npm run build:html-dev && npm run build:css && npm run build:js-dev",
+    "build:all-prod": "npm run build:html-prod && npm run build:css && npm run build:js-prod",
+    "build:all-docker": "npm run build:html-docker && npm run build:css && npm run build:js-prod",
+    "server": "majiang-server -p 8080 -c /netplay.html -d ./dist -S",
     "bot": "echo Run \"majiang-bot -n '麻雀ロボ' -v -r <Room Number> <Site Url>/server\"",
     "clean": "rm -f dist/*.html dist/js/* dist/css/*"
   },

@@ -1,0 +1,48 @@
+name: Build Docker Images
+
+on:
+  push:
+    branches:
+      - main
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-docker-images:
+    if: github.repository == 'coralsundy/mahjong-player'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get build metadata
+        run: |
+          curr_time=`date -u +"%Y-%m-%dT%H-%M-%SZ"`
+          echo "CURR_TIME=$curr_time" >> $GITHUB_ENV
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        id: push
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ env.CURR_TIME }}
+            ghcr.io/${{ env.IMAGE_NAME }}:latest

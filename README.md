@@ -1,25 +1,40 @@
-This is a fork of the original mahjong player suite (Majiang) created by @kobalab with contributions from other members.
+This is a fork of the original mahjong player suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
 
-It is created for personal use only and I will take it offline if the original creation complains.
+It is forked and tweaked for personal use only and I will take it offline if the original author complains.
 
 Thanks.
 
+------
+
+### Website
+
+* https://mjplayer.coralsundy.com
+
+------
+
 ### Tweaks:
 
-* 2025/04/18: Bundle majiang-server with the game frontend as a whole, update node scripts
-* 2025/04/17: Switch from local json to dynamically pull from tenhou xml then convert back to json
+* 2025/04/19: Add docker deployment with dockerfile and updated node scripts, auto deploy package with ghcr.io registry
+* 2025/04/18: Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
+* 2025/04/17: Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
 * 2025/04/17: Add deploy json to switch base_url instead of hardcoding
 
 
 ### Commands:
 
-* npm run dev / npm run release - Build site docs, update config/\*.json for different base_url
-* npm run server:dev / npm run server:release - Start majiang backend express server and host `dist` after building docs
+* npm run build:all-dev / npm run build:all-prod - Build site docs, update config/\*.json for different base_url
+  * npm run build:all-docker - Reserved for docker so that html PUG will apply localhost:8080 and pull og:image from github so not bound to specific domain name
+* npm run server - Start majiang backend express server and host `dist` after building docs
 * npm run bot - Show commands to start bot and connect to the server
 
-------
+### Docker:
 
-Website: https://mjplayer.coralsundy.com
+* Build docker image manually and deploy:
+  * docker build -t mahjong-player:latest -f Dockerfile .
+  * docker run -d -p 8080:8080 mahjong-player:latest
+* Pull existing image from [GitHub Packages](https://github.com/coralsundy/mahjong-player/pkgs/container/mahjong-player), build per commit:
+  * docker pull ghcr.io/coralsundy/mahjong-player:latest # Or other tags
+  * docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest
 
 ------
 
