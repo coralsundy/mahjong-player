@@ -4,8 +4,15 @@ It is created for personal use only and I will take it offline if the original c
 
 Thanks.
 
+------
+
+Website: https://mjplayer.coralsundy.com
+
+------
+
 ### Tweaks:
 
+* 2025/04/18: Add docker deployment with dockerfile and updated node scripts
 * 2025/04/18: Bundle majiang-server with the game frontend as a whole, update node scripts
 * 2025/04/17: Switch from local json to dynamically pull from tenhou xml then convert back to json
 * 2025/04/17: Add deploy json to switch base_url instead of hardcoding
@@ -14,12 +21,13 @@ Thanks.
 ### Commands:
 
 * npm run dev / npm run release - Build site docs, update config/\*.json for different base_url
-* npm run server:dev / npm run server:release - Start majiang backend express server and host `dist` after building docs
+* npm run server - Start majiang backend express server and host `dist` after building docs
 * npm run bot - Show commands to start bot and connect to the server
 
-------
+### Docker:
 
-Website: https://mjplayer.coralsundy.com
+* docker build -t mahjong-player:latest -f Dockerfile .
+* docker run -it -p 8080:8080 mahjong-player:latest
 
 ------
 

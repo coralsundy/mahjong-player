@@ -11,8 +11,7 @@
     "build:js-prod": "webpack --mode production",
     "dev": "npm run build:html-dev && npm run build:css && npm run build:js-dev",
     "release": "npm run build:html-prod && npm run build:css && npm run build:js-prod",
-    "server:dev": "npm run clean && npm run dev && majiang-server -p 8080 -c /netplay.html -d ./dist -S",
-    "server:release": "npm run clean && npm run release && majiang-server -p 8080 -c /netplay.html -d ./dist -S",
+    "server": "majiang-server -p 8080 -c /netplay.html -d ./dist -S",
     "bot": "echo Run \"majiang-bot -n '麻雀ロボ' -v -r <Room Number> <Site Url>/server\"",
     "clean": "rm -f dist/*.html dist/js/* dist/css/*"
   },
