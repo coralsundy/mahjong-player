@@ -13,7 +13,7 @@ Website: https://mjplayer.coralsundy.com
 ### Tweaks:
 
 * 2025/04/18: Add docker deployment with dockerfile and updated node scripts
-* 2025/04/18: Bundle majiang-server with the game frontend as a whole, update node scripts
+* 2025/04/18: Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
 * 2025/04/17: Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
 * 2025/04/17: Add deploy json to switch base_url instead of hardcoding
 
