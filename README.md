@@ -1,6 +1,6 @@
 This is a fork of the original mahjong player suite (Majiang) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
 
-It is created for personal use only and I will take it offline if the original creation complains.
+It is forked and tweaked for personal use only and I will take it offline if the original creation complains.
 
 Thanks.
 
