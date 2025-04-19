@@ -6,9 +6,16 @@ Thanks.
 
 ### Tweaks:
 
+* 2025/04/18: Bundle majiang-server with the game frontend as a whole, update node scripts
 * 2025/04/17: Switch from local json to dynamically pull from tenhou xml then convert back to json
 * 2025/04/17: Add deploy json to switch base_url instead of hardcoding
-* 2025/04/17: Add express server contributed by @xingfanxia in upstream
+
+
+### Commands:
+
+* npm run dev / npm run release - Build site docs, update config/\*.json for different base_url
+* npm run server:dev / npm run server:release - Start majiang backend express server and host `dist` after building docs
+* npm run bot - Show commands to start bot and connect to the server
 
 ------
 
