@@ -15,7 +15,7 @@ html(lang="ja")
     include ../inc/loaderr
     include ../inc/navi
     include ../inc/resize
-    .version ver. #{version}
+    .version ver. #{version} #{version_qualifier}
 
     form
       textarea.paiga(name="text" rows="10")
@@ -36,3 +36,6 @@ html(lang="ja")
     .paiga
       div
       textarea.paiga(rows="20")
+
+  footer
+    include ../inc/footer

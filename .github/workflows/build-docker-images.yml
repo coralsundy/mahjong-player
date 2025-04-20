@@ -6,6 +6,11 @@ on:
       - main
     tags:
       - '*'
+    paths:
+      - 'config/**'
+      - 'src/**'
+      - 'package**'
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}

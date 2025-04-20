@@ -1,5 +1,6 @@
 {
   "base_url": "http://localhost:8080",
+  "app_type": "website",
   "img_icon_url": "https://raw.githubusercontent.com/coralsundy/mahjong-player/main/dist/img/icon.png",
   "img_game_url": "https://raw.githubusercontent.com/coralsundy/mahjong-player/main/dist/img/game.png",
   "img_netplay_url": "https://raw.githubusercontent.com/coralsundy/mahjong-player/main/dist/img/netplay.png"

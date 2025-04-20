@@ -14,6 +14,7 @@ Thanks.
 
 ### Tweaks:
 
+* 2025/04/20: Make navbar and footer consistent across all the webpages
 * 2025/04/19: Add docker deployment with dockerfile and updated node scripts, auto deploy package with ghcr.io registry
 * 2025/04/19: Leave https://kobalab.github.io/paiga/ untouched on as it is hosted on github pages, if needed can also be hosted in express
 * 2025/04/18: Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts

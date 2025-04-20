@@ -1,3 +1,4 @@
 {
-  "base_url": "https://my-example-hostname.com"
+  "base_url": "https://my-example-hostname.com",
+  "app_type": "website"
 }

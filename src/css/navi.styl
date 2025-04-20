@@ -2,11 +2,15 @@
     font-size: 12px
     font-family: menu-font
     padding: 0
-    text-align: right
+    text-align: center
     li + li:before
-        content: ' | '
+        content: ' • '
     li
         display: inline-block
         a
             color: inherit
+            font-weight: bold
             text-decoration: none
+
+            &:hover
+                text-decoration: underline
