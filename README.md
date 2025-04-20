@@ -14,12 +14,16 @@ Thanks.
 
 ### Tweaks:
 
-* 2025/04/20: Make navbar and footer consistent across all the webpages
-* 2025/04/19: Add docker deployment with dockerfile and updated node scripts, auto deploy package with ghcr.io registry
-* 2025/04/19: Leave https://kobalab.github.io/paiga/ untouched on as it is hosted on github pages, if needed can also be hosted in express
-* 2025/04/18: Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
-* 2025/04/17: Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
-* 2025/04/17: Add deploy json to switch base_url instead of hardcoding
+* 2025/04/20:
+  * Make navbar and footer consistent across all the webpages
+* 2025/04/19:
+  * Add docker deployment with dockerfile and updated node scripts, auto deploy package with ghcr.io registry
+  * Leave https://kobalab.github.io/paiga/ untouched on as it is hosted on github pages, if needed can also be hosted in express
+* 2025/04/18:
+  * Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
+* 2025/04/17:
+  * Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
+  * Add deploy json to switch base_url instead of hardcoding
 
 
 ### Commands:

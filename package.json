@@ -22,12 +22,27 @@
     "url": "git+https://github.com/coralsundy/mahjong-player.git"
   },
   "keywords": [],
-  "author": "Satoshi Kobayashi (https://github.com/kobalab)",
+  "author": {
+    "name": "Satoshi Kobayashi",
+    "website": "https://kobalab.net",
+    "github": "https://github.com/kobalab"
+  },
+  "contributors": [
+    {
+      "name": "coralsundy",
+      "email": "coralsundy@gmail.com",
+      "website": "https://coralsundy.com",
+      "github": "https://github.com/coralsundy"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/coralsundy/mahjong-player/issues"
   },
   "homepage": "https://github.com/coralsundy/mahjong-player#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "overrides": {
     "pug": "^3.0.3"
   },
