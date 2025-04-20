@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - '*'
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -21,12 +23,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Get build metadata
-        run: |
-          curr_time=`date -u +"%Y-%m-%dT%H-%M-%SZ"`
-          echo "CURR_TIME=$curr_time" >> $GITHUB_ENV
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
@@ -35,14 +32,26 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
-        id: push
+      - name: Build and push Docker image on '${{ github.ref_name }}'
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ env.CURR_TIME }}
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+
+      - name: Build and push Docker image on 'latest'
+        if: github.ref_type != 'tag'
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
             ghcr.io/${{ env.IMAGE_NAME }}:latest
+      - name: ghcr.io cleanup action
+        uses: dataaxiom/ghcr-cleanup-action@ad729defc2c5047d29d4f11ac4a080a493aebd14
+        with:
+          exclude-tags: latest,main
+          delete-untagged: true
