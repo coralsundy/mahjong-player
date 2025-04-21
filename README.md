@@ -1,4 +1,4 @@
-This is a fork of the original mahjong player suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
+This is a fork of the original mahjong suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
 
 It is forked and tweaked for personal use only and I will take it offline if the original author complains.
 
@@ -6,14 +6,20 @@ Thanks.
 
 ------
 
-### Website
+### Website:
 
 * https://mjplayer.coralsundy.com
+
+### Desktop App:
+
+* https://github.com/coralsundy/mahjong-player/releases
 
 ------
 
 ### Tweaks:
 
+* 2025/04/21:
+  * Onboard [Tauri](https://tauri.app/) to build mahjong-player into an app
 * 2025/04/20:
   * Make navbar and footer consistent across all the webpages
 * 2025/04/19:
@@ -23,24 +29,33 @@ Thanks.
   * Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
 * 2025/04/17:
   * Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
-  * Add deploy json to switch base_url instead of hardcoding
+  * Add deploy json to switch `base_url` instead of hardcoding
 
 
-### Commands:
+### Build Site:
 
-* npm run build:all-dev / npm run build:all-prod - Build site docs, update config/\*.json for different base_url
-  * npm run build:all-docker - Reserved for docker so that html PUG will apply localhost:8080 and pull og:image from github so not bound to specific domain name
-* npm run server - Start majiang backend express server and host `dist` after building docs
-* npm run bot - Show commands to start bot and connect to the server
+* `npm install` - Install all dependencies
+* `npm run build:all-dev` / `npm run build:all-prod` - Build status site (./dist), update config/\*.json for different base_url
+  * `npm run build:all-docker` - Reserved for docker so that html PUG will apply localhost:8080 and pull og:image from github so not bound to specific domain name
+* `npm run server` - Start majiang backend express server and host `dist` after building docs
+* `npm run bot` - Show commands to start bot and connect to the server
+
+### Build App:
+
+* The app is built with [Tauri](https://tauri.app/), please install [rustup](https://rustup.rs/) and ensure rust version up to date
+* `npm install` - Install all dependencies
+* `npx tauri dev` - Build static site, start express server, build tauri app and serve the content
+* `npx tauri build` - Build static site (with docker config), build tauri app and different distributions based on host specifications
+
 
 ### Docker:
 
 * Build docker image manually and deploy:
-  * docker build -t mahjong-player:latest -f Dockerfile .
-  * docker run -d -p 8080:8080 mahjong-player:latest
+  * `docker build -t mahjong-player:latest -f Dockerfile .`
+  * `docker run -d -p 8080:8080 mahjong-player:latest`
 * Pull existing image from [GitHub Packages](https://github.com/coralsundy/mahjong-player/pkgs/container/mahjong-player), build per commit:
-  * docker pull ghcr.io/coralsundy/mahjong-player:latest # Or other tags
-  * docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest
+  * `docker pull ghcr.io/coralsundy/mahjong-player:latest # Or other tags`
+  * `docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest`
 
 ------
 

@@ -1,0 +1,53 @@
+name: Test Build Site and Build App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-site-app:
+    if: github.repository == 'coralsundy/mahjong-player'
+    strategy:
+      matrix:
+        node_version:
+          - '20.x'
+        os:
+          - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Install node ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Test build site
+        run: npm install && npm run build:all-dev
+
+      - name: Install rustup
+        uses: actions-rust-lang/setup-rust-toolchain@9399c7bb15d4c7d47b27263d024f0a4978346ba4
+        with:
+          toolchain: 'stable'
+
+      - name: Install dependencies linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            libgtk-3-dev \
+            libglib2.0-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            libsoup-3.0-dev \
+            libwebkit2gtk-4.1-dev \
+            build-essential \
+            pkg-config \
+            curl
+
+      - name: Test build app on the ${{ matrix.os }}
+        run: npm install && npx tauri build

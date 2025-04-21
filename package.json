@@ -15,7 +15,8 @@
     "build:all-docker": "npm run build:html-docker && npm run build:css && npm run build:js-prod",
     "server": "majiang-server -p 8080 -c /netplay.html -d ./dist -S",
     "bot": "echo Run \"majiang-bot -n '麻雀ロボ' -v -r <Room Number> <Site Url>/server\"",
-    "clean": "rm -f dist/*.html dist/js/* dist/css/*"
+    "clean": "rm -f dist/*.html dist/js/* dist/css/*",
+    "clean:tauri": "rm -rf src-tauri/target/*"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "pug": "^3.0.3"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^2.5.0",
     "pug-cli": "^1.0.0-alpha6",
     "stylus": "^0.64.0",
     "webpack-cli": "^5.1.4"
