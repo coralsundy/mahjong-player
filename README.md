@@ -40,7 +40,7 @@ Thanks.
 ### Build Site:
 
 * `npm install` - Install all dependencies
-* `npm run build:all-dev` / `npm run build:all-prod` - Build status site (./dist), update config/\*.json for different base_url
+* `npm run build:all-dev` / `npm run build:all-prod` - Build static site (./dist), update config/\*.json for different base_url
   * `npm run build:all-docker` - Reserved for docker so that html PUG will apply localhost:8080 and pull og:image from github so not bound to specific domain name
 * `npm run server` - Start majiang backend express server and host `dist` after building docs
 * `npm run bot` - Show commands to start bot and connect to the server
@@ -50,7 +50,7 @@ Thanks.
 * The app is built with [Tauri](https://tauri.app/), please install [rustup](https://rustup.rs/) and ensure rust version up to date
 * `npm install` - Install all dependencies
 * `npx tauri dev` - Build static site, start express server, build tauri app and serve the content
-* `npx tauri build` - Build static site (with docker config), build tauri app and different distributions based on host specifications
+* `npx tauri build` - Build static site (with docker config), build tauri app with installer based on host arch/plat
 
 
 ### Build Docker:
@@ -59,7 +59,7 @@ Thanks.
   * `docker build -t mahjong-player:latest -f Dockerfile .`
   * `docker run -d -p 8080:8080 mahjong-player:latest`
 * Pull existing image from [GitHub Packages](https://github.com/coralsundy/mahjong-player/pkgs/container/mahjong-player), build per commit:
-  * `docker pull ghcr.io/coralsundy/mahjong-player:latest # Or other tags`
+  * `docker pull ghcr.io/coralsundy/mahjong-player:latest` # Or other tags
   * `docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest`
 
 ------

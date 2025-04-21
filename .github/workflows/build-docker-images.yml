@@ -51,6 +51,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}:latest
+
       - name: ghcr.io cleanup action
         uses: dataaxiom/ghcr-cleanup-action@ad729defc2c5047d29d4f11ac4a080a493aebd14
         with:
