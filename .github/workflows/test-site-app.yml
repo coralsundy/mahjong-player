@@ -1,9 +1,6 @@
 name: Test Build Site and Build App
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
 
 jobs:

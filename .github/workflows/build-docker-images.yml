@@ -6,10 +6,6 @@ on:
       - main
     tags:
       - '*'
-    paths:
-      - 'config/**'
-      - 'src/**'
-      - 'package**'
 
 env:
   REGISTRY: ghcr.io

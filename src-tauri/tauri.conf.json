@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Mahjong Player App",
+        "title": "Mahjong Player App (appVer: 0.1.0, coreVer: 2.4.16)",
         "width": 800,
         "height": 600,
         "resizable": true,
