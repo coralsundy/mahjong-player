@@ -22,6 +22,8 @@ Thanks.
 
 ### Tweaks:
 
+* 2025/04/22:
+  * Add macOS App as well as multi-arch docker images (x64/arm64) to ghcr.io
 * 2025/04/21:
   * Onboard [Tauri](https://tauri.app/) to build mahjong-player into an app
 * 2025/04/20:

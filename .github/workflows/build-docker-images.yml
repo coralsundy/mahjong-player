@@ -9,7 +9,10 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  TAGS_REF: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+  TAGS_LATEST: |
+    ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+    ghcr.io/${{ github.repository }}:latest
 
 jobs:
   build-docker-images:
@@ -26,6 +29,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@b5ca514318bd6ebac0fb2aedd5d36ec1b5c232a2
+
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -34,23 +43,24 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image on '${{ github.ref_name }}'
+        if: github.ref_type == 'tag'
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
+          platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile
           push: true
-          tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
+          tags: ${{ env.TAGS_REF }}
 
-      - name: Build and push Docker image on 'latest'
+      - name: Build and push Docker image on '${{ github.ref_name }}' 'latest'
         if: github.ref_type != 'tag'
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
+          platforms: linux/amd64,linux/arm64
           context: .
           file: ./Dockerfile
           push: true
-          tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.TAGS_LATEST }}
 
       - name: ghcr.io cleanup action
         uses: dataaxiom/ghcr-cleanup-action@ad729defc2c5047d29d4f11ac4a080a493aebd14

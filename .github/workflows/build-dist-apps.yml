@@ -16,6 +16,8 @@ jobs:
           - ubuntu-24.04
           - ubuntu-24.04-arm
           - windows-2022
+          - macos-13
+          - macos-14 # arm64
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -64,6 +66,10 @@ jobs:
             PKG_MSI=`find . -name '*.msi'`
             PKG_EXE=`find . -name '*.exe'`
             mv -v $PKG_MSI $PKG_EXE artifacts/
+          elif [[ "$OS" = *"macos"* ]]; then
+            cd dmg
+            PKG_DMG=`find . -name '*.dmg'`
+            mv -v $PKG_DMG ../artifacts/
           fi
 
       - name: Upload artifacts ${{ matrix.os }}
@@ -96,6 +102,18 @@ jobs:
         uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e
         with:
           name: artifacts-windows-2022
+          path: artifacts
+
+      - name: Retrieve artifacts macos-13
+        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e
+        with:
+          name: artifacts-macos-13
+          path: artifacts
+
+      - name: Retrieve artifacts macos-14 arm64
+        uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e
+        with:
+          name: artifacts-macos-14
           path: artifacts
 
       - name: Verify all artifacts
