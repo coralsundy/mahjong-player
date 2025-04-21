@@ -6,13 +6,17 @@ Thanks.
 
 ------
 
-### Website:
+### Mahjong Player Website:
 
 * https://mjplayer.coralsundy.com
 
 ### Desktop App:
 
 * https://github.com/coralsundy/mahjong-player/releases
+
+### Docker Images:
+
+* https://github.com/coralsundy/mahjong-player/pkgs/container/mahjong-player
 
 ------
 
@@ -31,6 +35,7 @@ Thanks.
   * Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
   * Add deploy json to switch `base_url` instead of hardcoding
 
+------
 
 ### Build Site:
 
@@ -48,7 +53,7 @@ Thanks.
 * `npx tauri build` - Build static site (with docker config), build tauri app and different distributions based on host specifications
 
 
-### Docker:
+### Build Docker:
 
 * Build docker image manually and deploy:
   * `docker build -t mahjong-player:latest -f Dockerfile .`
