@@ -1,61 +1,67 @@
-This is a fork of the original mahjong suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
+[Mahjong-Player](https://mahjongplayer.app) is a fork of the original mahjong suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
 
-It is forked and tweaked for personal use only and I will take it offline if the original author complains.
+Several changes are made for my own daily use. It includes but not limited to:
 
-Thanks.
+* Easy setup with [Docker container images](#build-docker)
+* An [App](#how-to-play) built with [Tauri](https://tauri.app/) to play offline
+* Bundle with [@kobalab/majiang-server](https://github.com/kobalab/majiang-server) for easier [local web development](#build-from-source) and netplay in one package  
+* More changes are listed in [this section](#notable-changes)
+
+![app.png](dist/img/app.png)
+
+I will take this repository offline if the original author complains. Thanks.
 
 ------
 
-### Mahjong Player Website:
+### How to Play
 
-* https://mjplayer.coralsundy.com
+#### Mahjong Player Website:
 
-### Desktop App:
+* https://mahjongplayer.app
+
+#### Desktop App:
 
 * https://github.com/coralsundy/mahjong-player/releases
 
-### Docker Images:
+#### Docker Images:
 
 * https://github.com/coralsundy/mahjong-player/pkgs/container/mahjong-player
 
 ------
 
-### Tweaks:
+### Notable Changes:
 
-* 2025/04/22:
-  * Add macOS App as well as multi-arch docker images (x64/arm64) to ghcr.io
-* 2025/04/21:
-  * Onboard [Tauri](https://tauri.app/) to build mahjong-player into an app
-* 2025/04/20:
-  * Make navbar and footer consistent across all the webpages
-* 2025/04/19:
-  * Add docker deployment with dockerfile and updated node scripts, auto deploy package with ghcr.io registry
-  * Leave https://kobalab.github.io/paiga/ untouched on as it is hosted on github pages, if needed can also be hosted in express
-* 2025/04/18:
-  * Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
-* 2025/04/17:
-  * Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
-  * Add deploy json to switch `base_url` instead of hardcoding
+* Add macOS App as well as multi-arch docker images (x64/arm64) to ghcr.io
+* Onboard [Tauri](https://tauri.app/) to build mahjong-player into an app
+* Make navbar and footer consistent across all the webpages
+* Add docker deployment with dockerfile and updated node scripts, auto deploy package with ghcr.io registry
+* Bundle @kobalab/majiang-server with the game frontend as a whole, update node scripts
+* Switch from @kobalab/tenhou-log server mode to import libs in order to obtain logs from tenhou xml then convert to json
 
 ------
 
-### Build Site:
+### Build from Source
+
+#### Build Web:
 
 * `npm install` - Install all dependencies
 * `npm run build:all-dev` / `npm run build:all-prod` - Build static site (./dist), update config/\*.json for different base_url
-  * `npm run build:all-docker` - Reserved for docker so that html PUG will apply localhost:8080 and pull og:image from github so not bound to specific domain name
+* `npm run build:all-docker` - Reserved for docker so that html PUG will apply localhost:8080 and pull og:image from github so not bound to specific domain name
+* `npm run build:all-app` - Reserved for app, similar to `npm run build:all-docker` but specifically generated for app
 * `npm run server` - Start majiang backend express server and host `dist` after building docs
 * `npm run bot` - Show commands to start bot and connect to the server
 
-### Build App:
+#### Build App:
 
 * The app is built with [Tauri](https://tauri.app/), please install [rustup](https://rustup.rs/) and ensure rust version up to date
 * `npm install` - Install all dependencies
 * `npx tauri dev` - Build static site, start express server, build tauri app and serve the content
 * `npx tauri build` - Build static site (with docker config), build tauri app with installer based on host arch/plat
 
+**Note: A few dependencies may be required for building on linux, see [build-dist-apps.yml](.github/workflows/build-dist-apps.yml).**
 
-### Build Docker:
+
+#### Build Docker:
 
 * Build docker image manually and deploy:
   * `docker build -t mahjong-player:latest -f Dockerfile .`
@@ -65,6 +71,19 @@ Thanks.
   * `docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest`
 
 ------
+
+### Versioning
+
+Mahjong-Player follows a casual development cycle. For releases, we use [CalVer](https://calver.org/) to mark overall versions.
+
+Each release includes two main components and often released together:
+
+* The Web code [@kobalab/Majiang](https://github.com/kobalab/Majiang) stays in sync with the upstream for now, but may branch off later if major features are added.  
+* The App code uses [SemVer](https://semver.org/) to track major, minor, and patch changes, just like Web.
+
+------
+
+## Original README:
 
 <h1><a href="https://kobalab.net/majiang/"><img src="dist/img/logo.png" alt="電脳麻将" height=72></a></h1>
 

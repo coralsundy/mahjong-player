@@ -1,18 +1,18 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "mahjong-player-app",
+  "productName": "MahjongPlayer",
   "version": "0.2.0",
-  "identifier": "com.coralsundy.mjplayer",
+  "identifier": "com.coralsundy.mahjongplayer",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:8080",
-    "beforeDevCommand": "npm run build:all-dev && npm run server",
-    "beforeBuildCommand": "npm run build:all-docker"
+    "beforeDevCommand": "npm run build:all-app && npm run server",
+    "beforeBuildCommand": "npm run build:all-app"
   },
   "app": {
     "windows": [
       {
-        "title": "Mahjong Player App (appVer: 0.2.0, coreVer: 2.4.16)",
+        "title": "Mahjong Player App (appVer: 0.2.0, webVer: 2.4.16)",
         "width": 1024,
         "height": 768,
         "resizable": true,
