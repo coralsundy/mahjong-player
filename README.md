@@ -1,11 +1,13 @@
-[Mahjong-Player](https://mahjongplayer.app) is a fork of the original mahjong suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab) with contributions from other members.
+[Mahjong-Player](https://mahjongplayer.app) is a fork of the original mahjong suite ([@kobalab/Majiang](https://github.com/kobalab/Majiang)) created by [@kobalab](https://github.com/kobalab).
 
-Several changes are made for my own daily use. It includes but not limited to:
+Several changes are made for my own daily use as well as contributions from others. It includes but not limited to:
 
 * Easy setup with [Docker container images](#build-docker)
 * An [App](#how-to-play) built with [Tauri](https://tauri.app/) to play offline
 * Bundle with [@kobalab/majiang-server](https://github.com/kobalab/majiang-server) for easier [local web development](#build-from-source) and netplay in one package  
-* More changes are listed in [this section](#notable-changes)
+* Automatic builds and release for new versions
+* More notable changes are listed in [this section](#notable-changes)
+* Issues are tracked in this [project boards](https://github.com/users/coralsundy/projects/1)
 
 ![app.png](dist/img/app.png)
 
