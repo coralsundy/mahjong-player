@@ -1,4 +1,4 @@
-name: Build Docker Images
+name: Build Test Docker
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     tags:
       - '*'
+  pull_request:
 
 env:
   REGISTRY: ghcr.io
@@ -15,8 +16,23 @@ env:
     ghcr.io/${{ github.repository }}:latest
 
 jobs:
+  test-docker-images:
+    if: github.repository == 'coralsundy/mahjong-player' && github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Test Docker Build
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+
   build-docker-images:
-    if: github.repository == 'coralsundy/mahjong-player'
+    if: github.repository == 'coralsundy/mahjong-player' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
     permissions:

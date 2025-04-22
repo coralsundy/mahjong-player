@@ -33,6 +33,7 @@ I will take this repository offline if the original author complains. Thanks.
 
 ### Notable Changes:
 
+* Add sitemap.xml for docker distribution
 * Add macOS App as well as multi-arch docker images (x64/arm64) to ghcr.io
 * Onboard [Tauri](https://tauri.app/) to build mahjong-player into an app
 * Make navbar and footer consistent across all the webpages
@@ -67,10 +68,12 @@ I will take this repository offline if the original author complains. Thanks.
 
 * Build docker image manually and deploy:
   * `docker build -t mahjong-player:latest -f Dockerfile .`
-  * `docker run -d -p 8080:8080 mahjong-player:latest`
+  * `docker run -d -p 8080:8080 mahjong-player:latest` # Without sitemap
+  * `docker run -d -p 8080:8080 -e "SITE_URL=https://<my_site_url>" mahjong-player:latest` # With sitemap
 * Pull existing image from [GitHub Packages](https://github.com/coralsundy/mahjong-player/pkgs/container/mahjong-player), build per commit:
   * `docker pull ghcr.io/coralsundy/mahjong-player:latest` # Or other tags
-  * `docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest`
+  * `docker run -d -p 8080:8080 ghcr.io/coralsundy/mahjong-player:latest` # Without sitemap
+  * `docker run -d -p 8080:8080 -e "SITE_URL=https://<my_site_url>" ghcr.io/coralsundy/mahjong-player:latest` # With sitemap
 
 ------
 
