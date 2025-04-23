@@ -54,23 +54,42 @@ jobs:
         run: |
           npm install
           npx tauri build
+
+          APP_VERSION=`jq -r '.version' src-tauri/tauri.conf.json`
+          APP_NAME=`jq -r '.productName' src-tauri/tauri.conf.json`
+          WEB_VERSION=`jq -r '.version' package.json`
+          MP_VERSION=${{ github.ref_name }}
+          APP_ARCH=`uname -m`
+          OS=${{ matrix.os }}
+
+          if [ "$APP_ARCH" = "amd64" ]; then
+            APP_ARCH="x86_64"
+          elif [ "$APP_ARCH" = "aarch64" ]; then
+            APP_ARCH="arm64"
+          fi
+
           cd src-tauri/target/release/bundle
           mkdir artifacts
-          OS=${{ matrix.os }}
           if [[ "$OS" = *"ubuntu"* ]]; then
-            PKG_RPM=`find . -name '*.rpm'`
-            PKG_DEB=`find . -name '*.deb'`
-            PKG_APPIMAGE=`find . -name '*.AppImage'`
-            mv -v $PKG_RPM $PKG_DEB $PKG_APPIMAGE artifacts/
+            OS_SHORT='linux'
+            PKG_RPM=`find rpm -name '*.rpm'`
+            PKG_DEB=`find deb -name '*.deb'`
+            PKG_APPIMAGE=`find appimage -name '*.AppImage'`
           elif [[ "$OS" = *"windows"* ]]; then
-            PKG_MSI=`find . -name '*.msi'`
-            PKG_EXE=`find . -name '*.exe'`
-            mv -v $PKG_MSI $PKG_EXE artifacts/
+            OS_SHORT='windows'
+            PKG_MSI=`find msi -name '*.msi'`
+            PKG_EXE=`find nsis -name '*.exe'`
           elif [[ "$OS" = *"macos"* ]]; then
-            cd dmg
-            PKG_DMG=`find . -name '*.dmg'`
-            mv -v $PKG_DMG ../artifacts/
+            OS_SHORT='macos'
+            PKG_DMG=`find dmg -name '*.dmg'`
           fi
+
+          APP_FILENAME=${APP_NAME}-${MP_VERSION}_app-v${APP_VERSION}_web-v${WEB_VERSION}_$OS_SHORT-$APP_ARCH
+
+          for app_dist in $PKG_RPM $PKG_DEB $PKG_APPIMAGE $PKG_MSI $PKG_EXE $PKG_DMG; do
+            APP_FILENAME_NEW=`echo "${app_dist##*.}" | xargs -I{} echo "$APP_FILENAME.{}"`
+            mv -v $app_dist artifacts/$APP_FILENAME_NEW
+          done
 
       - name: Upload artifacts ${{ matrix.os }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
